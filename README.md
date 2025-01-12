@@ -1,99 +1,233 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# **Geospatial Query System**
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project implements a geospatial query system using **NestJS** and **MongoDB**. It allows you to manage city boundaries and documents with geospatial data. The application demonstrates how to use MongoDB's geospatial features for CRUD operations and querying.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## **Features**
 
-## Project setup
+- Manage city boundaries stored as GeoJSON polygons.
+- Perform CRUD operations on documents with geospatial data (GeoJSON points).
+- Query documents within specified city boundaries using `$geoWithin`.
+- API documentation with **Swagger**.
+- Unit and End-to-End (E2E) tests.
+- MongoDB integration for production and in-memory database for testing.
 
-```bash
-$ npm install
+---
+
+## **Project Structure**
+
+```plaintext
+geospatial-query-system/
+├── src/
+│   ├── city/
+│   │   ├── dtos/
+│   │   │   ├── create-city.dto.ts
+│   │   │   └── update-city.dto.ts
+│   │   ├── schemas/
+│   │   │   └── city.schema.ts
+│   │   ├── city.controller.ts
+│   │   ├── city.service.ts
+│   │   └── city.module.ts
+│   ├── document/
+│   │   ├── dtos/
+│   │   │   ├── create-document.dto.ts
+│   │   │   └── update-document.dto.ts
+│   │   ├── schemas/
+│   │   │   └── document.schema.ts
+│   │   ├── document.controller.ts
+│   │   ├── document.service.ts
+│   │   └── document.module.ts
+│   ├── app.module.ts
+│   └── main.ts
+├── test/
+│   └── app.e2e-spec.ts
+├── package.json
+├── tsconfig.json
+├── jest.config.js
+└── README.md
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+## **Tech Stack**
 
-# watch mode
-$ npm run start:dev
+- **Backend**: [NestJS](https://nestjs.com/)
+- **Database**: [MongoDB](https://www.mongodb.com/)
+- **API Documentation**: Swagger (accessible at `/api/docs`)
+- **Testing**: Jest, Supertest, and mongodb-memory-server
 
-# production mode
-$ npm run start:prod
+---
+
+## **Getting Started**
+
+### **1. Prerequisites**
+
+Ensure you have the following installed:
+- Node.js (v16+)
+- MongoDB Atlas (or local MongoDB instance)
+- Yarn (optional but recommended)
+
+---
+
+### **2. Installation**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/geospatial-query-system.git
+   cd geospatial-query-system
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. Create a `.env` file in the project root:
+   ```env
+   MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority
+   PORT=3000
+   ```
+
+---
+
+### **3. Running the Application**
+
+1. Start the development server:
+   ```bash
+   npm run start:dev
+   ```
+
+2. Access the Swagger API documentation:
+   - URL: `http://localhost:3000/api/docs`
+
+---
+
+### **4. Running Tests**
+
+1. Run unit tests:
+   ```bash
+   npm run test
+   ```
+
+2. Run E2E tests:
+   ```bash
+   npm run test:e2e
+   ```
+
+---
+
+## **API Endpoints**
+
+### **City Endpoints**
+- **POST /cities**: Create a new city with boundary data.
+- **GET /cities**: Fetch all cities.
+- **GET /cities/:id**: Fetch a city by ID.
+- **PATCH /cities/:id**: Update a city's boundary or name.
+- **DELETE /cities/:id**: Delete a city.
+
+### **Document Endpoints**
+- **POST /documents**: Create a new document.
+- **GET /documents**: Fetch all documents.
+- **GET /documents/:id**: Fetch a document by ID.
+- **PATCH /documents/:id**: Update a document.
+- **DELETE /documents/:id**: Delete a document.
+- **POST /documents/within-city**: Fetch documents within a specified city boundary.
+
+---
+
+## **Sample Data**
+
+### City Data
+```json
+{
+  "name": "New York City",
+  "boundary": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [-74.25909, 40.477399],
+        [-73.700272, 40.916178],
+        [-73.935242, 40.73061],
+        [-74.25909, 40.477399]
+      ]
+    ]
+  }
+}
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+### Document Data
+```json
+{
+  "name": "Central Park",
+  "type": "landmark",
+  "location": {
+    "type": "Point",
+    "coordinates": [-73.965355, 40.782865]
+  }
+}
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## **Testing Strategy**
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+1. **Unit Tests**:
+   - Tests for `CityService` and `DocumentService` business logic.
+   - Mocked MongoDB models using `jest`.
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+2. **E2E Tests**:
+   - Tests for API endpoints using `supertest`.
+   - In-memory MongoDB with `mongodb-memory-server`.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## **Deployment**
 
-Check out a few resources that may come in handy when working with NestJS:
+### **1. Hosting Platforms**
+- **Heroku**
+- **AWS**
+- **Vercel**
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### **2. Deployment Steps**
+1. Push the repository to GitHub.
+2. Link the repository to the hosting platform.
+3. Add the required environment variables (e.g., `MONGO_URI`, `PORT`).
+4. Deploy the application.
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## **Future Enhancements**
 
-## Stay in touch
+1. **Pagination and Sorting**:
+   - Add pagination for fetching large datasets.
+   - Allow sorting by `name` or `type`.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+2. **Filters**:
+   - Query documents by `type` (e.g., `landmark`, `museum`).
 
-## License
+3. **Authentication**:
+   - Add user authentication for secured endpoints.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+## **Contributing**
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Make your changes and commit them:
+   ```bash
+   git commit -m "Add new feature"
+   ```
+4. Push to your fork and submit a pull request.
+
+---
+
+## **License**
+This project is licensed under the MIT License.
